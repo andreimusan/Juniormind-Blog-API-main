@@ -1,0 +1,21 @@
+@hostname = http://localhost:8000
+
+### set active as false for user ID 4
+
+delete {{hostname}}/api/users/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### set active as false and delete posts for user ID 3
+
+delete {{hostname}}/api/users/3?deletePosts=yes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### error, no user has ID 7
+
+delete {{hostname}}/api/users/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### error, ID is NaN
+
+delete {{hostname}}/api/users/Jhon
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU

@@ -1,0 +1,84 @@
+// try get comment by ID
+
+GET http://localhost:8000/api/comments/5
+
+###
+GET http://localhost:8000/api/comments/6
+
+###
+GET http://localhost:8000/api/comments/1
+
+###
+GET http://localhost:8000/api/comments/2
+
+###
+GET http://localhost:8000/api/comments/4
+
+###
+GET http://localhost:8000/api/comments/11
+
+###
+// try get comment using wrong ID
+GET http://localhost:8000/api/comments/6
+
+###
+// try get comments by postID - first page
+GET http://localhost:8000/api/comments?filter=post&id=64
+
+###
+// try get comments by postID - random page
+GET http://localhost:8000/api/comments?filter=post&id=64&previousPageLastCommentIndex=326
+
+###
+// try get comments by wrong postID - first page - empty array
+GET http://localhost:8000/api/comments?filter=post&id=100
+
+###
+// try get comments by author - first page
+GET http://localhost:8000/api/comments?filter=author&id=1
+
+###
+// try get comments by author - random page
+GET http://localhost:8000/api/comments?filter=author&id=1&previousPageLastCommentIndex=802
+
+###
+// try get comments by author and wrong ID - first page - empty array
+GET http://localhost:8000/api/comments?filter=author&id=119
+
+###
+// try get comments by parentID - first page
+GET http://localhost:8000/api/comments?filter=parent&id=636
+
+###
+// try get comments by parentID - random page
+GET http://localhost:8000/api/comments?filter=parent&id=636&previousPageLastCommentIndex=774
+
+###
+// try get comments by parentID and wrong ID - first page - empty array
+GET http://localhost:8000/api/comments?filter=parent&id=1
+
+###
+// try get comments by wrong criteria  - first page - error message
+GET http://localhost:8000/api/comments?filter=auth&id=111
+
+###
+// try to get comments by search text - first page
+GET http://localhost:8000/api/comments?filter=search&id=64&searchText=u
+
+###
+// try to get comments by search text - random page
+GET http://localhost:8000/api/comments?filter=search&id=64&previousPageLastCommentIndex=744&searchText=u
+
+###
+// try to get comments by non existant search text - should return empty array and dataCount = 0
+GET http://localhost:8000/api/comments?filter=search&id=64&previousPageLastCommentIndex=10&searchText=sejhjhjhjhjhj
+
+###
+// try to get comments by search filter without providing the search text - first page
+// should return Invalid query parameters error
+GET http://localhost:8000/api/comments?filter=search&id=64
+
+###
+// try to get comments by search filter with empty string as search text - first page
+// should return Invalid query parameters error
+GET http://localhost:8000/api/comments?filter=search&id=64&search=

@@ -1,0 +1,77 @@
+@hostname = http://localhost:8000
+
+###
+// test - get posts
+get {{hostname}}/api/posts
+
+###
+// test - get posts by id
+get {{hostname}}/api/posts/1
+
+###
+// test - get posts by wrong id
+get {{hostname}}/api/posts/20
+
+###
+// test - should return first page if given page is less than 1
+get {{hostname}}/api/posts?page=0&limit=2
+
+###
+// test - should return first 6 posts if limit is less than 1
+get {{hostname}}/api/posts?page=1&limit=0
+
+###
+// test - should return first 2 posts
+get {{hostname}}/api/posts?page=1&limit=2
+
+###
+// test - should return 3rd and 4th post
+get {{hostname}}/api/posts?page=2&limit=2
+
+###
+// test - should return error if trying to access a page that has no posts
+get {{hostname}}/api/posts?page=10&limit=2
+
+###
+// test - should return first 2 posts that meet search criteria
+get {{hostname}}/api/posts?page=1&limit=2&search=st
+
+###
+// test - search should return all posts containing given word in title
+get {{hostname}}/api/posts/?search=post
+
+###
+// test - search should return all posts containing given word in content
+get {{hostname}}/api/posts/?search=lorem
+
+###
+// test - search should return all posts created by given author
+get {{hostname}}/api/posts/?search=jhon
+
+###
+// test - search should return error if no posts matched the search
+get {{hostname}}/api/posts/?search=zzz
+
+###
+// test - get posts by title
+get {{hostname}}/api/posts/?type=title&title=post%20nou
+
+###
+// test - get posts by wrong title
+get {{hostname}}/api/posts/?type=title&title=posttt1
+
+###
+// test - get posts by author
+get {{hostname}}/api/posts/?type=author&author=1
+
+###
+// test - get posts by wrong author
+get {{hostname}}/api/posts/?type=author&author=1234
+
+###
+// test - get post's image by post ID should return the image
+get {{hostname}}/api/posts/image/20
+
+###
+// test - get post's image by post ID should error if post does not have an image
+get {{hostname}}/api/posts/image/19

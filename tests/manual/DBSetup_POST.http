@@ -1,0 +1,10 @@
+@hostname = http://localhost:8000
+
+// test - post one post
+POST {{hostname}}/api/setup
+Content-Type: application/json
+
+{
+      "type": "sqlite",
+      "database": "blogDB"
+}

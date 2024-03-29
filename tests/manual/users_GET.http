@@ -1,0 +1,102 @@
+@hostname = http://localhost:8000
+ 
+### returns all users if user is admin
+
+get {{hostname}}/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### if user is not admin error expected: Forbidden
+
+get {{hostname}}/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikpob24iLCJlbWFpbCI6Impob25AbWFpbC5jb20iLCJ1c2VySWQiOjIsImlzQWRtaW4iOmZhbHNlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NjEwMC4wMjksImV4cCI6NjE2NTA5OTYwNDB9.FyQJFev8Gbcz2oEZPIWTqT4a4CQNmwB1UGl_GCSsdxw
+
+
+### returns user with ID 1
+
+get {{hostname}}/api/users/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### if user is not admin, error expected: Forbidden
+
+get {{hostname}}/api/users/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikpob24iLCJlbWFpbCI6Impob25AbWFpbC5jb20iLCJ1c2VySWQiOjIsImlzQWRtaW4iOmZhbHNlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NjEwMC4wMjksImV4cCI6NjE2NTA5OTYwNDB9.FyQJFev8Gbcz2oEZPIWTqT4a4CQNmwB1UGl_GCSsdxw
+
+### error, no user has this ID
+
+get {{hostname}}/api/users/8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### returns user with email address: vlad@mail.com
+
+get {{hostname}}/api/users?email=vlad@mail.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### error, no user with email address: vlad1@mail.com
+
+get {{hostname}}/api/users?email=vlad1@mail.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### if user is not admin, error expected: Forbidden
+
+get {{hostname}}/api/users?email=vlad1@mail
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikpob24iLCJlbWFpbCI6Impob25AbWFpbC5jb20iLCJ1c2VySWQiOjIsImlzQWRtaW4iOmZhbHNlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NjEwMC4wMjksImV4cCI6NjE2NTA5OTYwNDB9.FyQJFev8Gbcz2oEZPIWTqT4a4CQNmwB1UGl_GCSsdxw
+
+### error, ID is NaN
+
+get {{hostname}}/api/users/Sarah
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### search users by username
+
+get {{hostname}}/api/users?search=andrei
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### search users by email
+
+get {{hostname}}/api/users?search=mail
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### search users by special character
+
+get {{hostname}}/api/users?search=@
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### search users by inexisting filter text should return empty array
+
+get {{hostname}}/api/users?search=qwerty
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### users pagination - page 1 - should return users from 1 to 5
+
+get {{hostname}}/api/users?page=1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### users pagination - page 2 - should return users from 6 to 10
+
+get {{hostname}}/api/users?page=2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### users pagination - page 3 - should return users from 10 to last one
+
+get {{hostname}}/api/users?page=3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### users pagination - page 4 - should return an empty array if the number of users is lower than pages * no of users per page
+
+get {{hostname}}/api/users?page=4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### users search & pagination - page 1 & search for single option
+
+get {{hostname}}/api/users?page=1&search=andrei
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### users search & pagination - page 1 & search for multiple options user
+
+get {{hostname}}/api/users?page=1&search=cutu
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+
+### users search & pagination - page 5 & search - should return an empty array if the number of results is lower than pages * no of results per page
+
+get {{hostname}}/api/users?page=5&search=cutu
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU

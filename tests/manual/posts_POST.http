@@ -1,0 +1,58 @@
+@hostname = http://localhost:8000
+
+// test - post one post - admin - success
+POST {{hostname}}/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MTEzNDkxOS4yNjcsImV4cCI6NjE2NTExMzQ4NTl9.MtUN5JBqVNhNFrMFO6N7xVKymnYw-97pU35joBxocAA
+Content-Type: application/json
+
+{
+    "title": "title 1",
+    "content": "post content",
+    "author": 1
+}
+
+###
+// test - post one post when user is NOT admin - success
+POST {{hostname}}/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNhcmFoIiwiZW1haWwiOiJzYXJhaEBtYWlsLmNvbSIsInVzZXJJZCI6MiwiaXNBZG1pbiI6ZmFsc2UsImFjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjUxMTM1MDAxLjQ2NCwiZXhwIjo2MTY1MTEzNDk0MX0.IVfg0kf2A3wCe699P-mZZzRyXe3BAVqx9YhvfFjYsoA 
+Content-Type: application/json
+
+{
+    "title": "title 2",
+    "content": "post content 2",
+    "author": 2
+}
+
+###
+// test - post one post when user is NOT active - unauthorized
+POST {{hostname}}/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNhcmFoIiwiZW1haWwiOiJzYXJhaEBtYWlsLmNvbSIsInVzZXJJZCI6MiwiaXNBZG1pbiI6ZmFsc2UsImFjdGl2ZSI6ZmFsc2UsImlhdCI6MTY1MTEzNTAwMS40NjQsImV4cCI6NjE2NTExMzQ5NDF9.pHy4Hw-9buzMkBcBU8l00d0zzoC_uInOE3WmamsveTw
+Content-Type: application/json
+
+{
+    "title": "title 3",
+    "content": "post content 3",
+    "author": 2
+}
+
+###
+// try add new post without providing all data - admin - error
+POST {{hostname}}/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MTEzNDkxOS4yNjcsImV4cCI6NjE2NTExMzQ4NTl9.MtUN5JBqVNhNFrMFO6N7xVKymnYw-97pU35joBxocAA
+Content-Type: application/json
+
+{
+    "title": "new post",
+    "author": 1
+}
+
+###
+// try add new post with invalid author id - unauthorised
+POST {{hostname}}/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjo3LCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MTEzNDkxOS4yNjcsImV4cCI6NjE2NTExMzQ4NTl9.VW5-63Zk6qhVssN4jv6H9a-UB-OfzoyWHKptsOiXhR4
+Content-Type: application/json
+
+{
+    "title": "new post",
+    "content": "new content"
+}

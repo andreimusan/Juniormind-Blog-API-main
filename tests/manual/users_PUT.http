@@ -1,0 +1,111 @@
+@hostname = http://localhost:8000
+ 
+### updates the name to user with ID 3
+
+put {{hostname}}/api/users/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+ 
+{
+    "name": "Lugh"
+}
+
+### if user is not admin or owner, expected error: Forbidden
+
+put {{hostname}}/api/users/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikpob24iLCJlbWFpbCI6Impob25AbWFpbC5jb20iLCJ1c2VySWQiOjIsImlzQWRtaW4iOmZhbHNlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NjEwMC4wMjksImV4cCI6NjE2NTA5OTYwNDB9.FyQJFev8Gbcz2oEZPIWTqT4a4CQNmwB1UGl_GCSsdxw
+Content-Type: application/json
+ 
+{
+    "name": "Lugh"
+}
+
+### updates the email to user with ID 3
+
+put {{hostname}}/api/users/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+ 
+{
+    "email": "Lugh@mail.com",
+    "status": false
+}
+
+### error, no user has ID 7
+
+put {{hostname}}/api/users/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+ 
+{
+    "email": "sarah2@mail.com"
+}
+
+### error, name shoul have at least 3 characters
+
+put {{hostname}}/api/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+ 
+{
+    "name": "Lu",
+    "email": "sarah2@mail.com",
+    "password": "password1"
+}
+
+### error, invalid email
+
+put {{hostname}}/api/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+ 
+{
+    "name": "Lugh",
+    "email": "sarah2@mail",
+    "password": "password1"
+}
+
+### error, password should have at least 6 characters
+
+put {{hostname}}/api/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+ 
+{
+    "name": "Lugh",
+    "email": "sarah2@mail.com",
+    "password": "pas"
+}
+
+### updates password to user with ID 1
+
+put {{hostname}}/api/users/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+ 
+{
+    "password": "password1"
+}
+
+### updates name and password to user with ID 3
+
+put {{hostname}}/api/users/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+ 
+{
+    "name": "Jhon",
+    "password": "123456"
+}
+
+### updates name, email and password to user with ID 3
+
+put {{hostname}}/api/users/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+ 
+{
+    "name": "Jhonny",
+    "email": "jhonny@mail.com",
+    "password": "123456"
+}

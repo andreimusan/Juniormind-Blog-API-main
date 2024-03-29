@@ -1,0 +1,76 @@
+// add new comment if user is logged in
+POST http://localhost:8000/api/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+
+{
+    "postID": 1,
+    "text": "Test comment #2"
+}
+
+###
+// if user is not logged in expected error: Unauthorized
+POST http://localhost:8000/api/comments
+Content-Type: application/json
+
+{
+    "postID": 1,
+    "text": "This is comment #2"
+}
+
+###
+// if token is invalid or expired expected error: Unauthorized
+POST http://localhost:8000/api/comments
+Authorization: Bearer eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+
+{
+    "postID": 1,
+    "text": "This is comment #2"
+}
+
+###
+// try post new comment without all required fields
+POST http://localhost:8000/api/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+
+{
+    "text": "This is comment #5"
+}
+
+###
+// try post new comment with invalid parentID
+POST https://localhost:8443/api/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+
+{
+    "postID": 1,
+    "text": "This is comment #6",
+    "parentID": 100
+}
+
+###
+// try post new comment with valid parentID
+POST https://localhost:8443/api/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MDk5NTk5OC4yMDcsImV4cCI6NjE2NTA5OTU5Mzh9.lJO9Mtn-xKgcGYqqaZmJLAToFKbCSDc_driFqZqIkpU
+Content-Type: application/json
+
+{
+    "postID": 1,
+    "text": "This comment is added.",
+    "parentID": 1
+}
+
+###
+
+// try post new comment with valid parentID but invalid author
+POST https://localhost:8443/api/comments
+Content-Type: application/json
+
+{
+    "postID": 2,
+    "text": "This is comment #6",
+    "parentID": 2
+}

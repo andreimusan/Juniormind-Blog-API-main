@@ -1,0 +1,67 @@
+@hostname = http://localhost:8000
+
+// test - update post - admin, not owner - success
+PUT {{hostname}}/api/posts/53
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MTEzNDkxOS4yNjcsImV4cCI6NjE2NTExMzQ4NTl9.MtUN5JBqVNhNFrMFO6N7xVKymnYw-97pU35joBxocAA
+Content-Type: application/json
+
+{
+    "title": "changed title by admin",
+    "content": "this post was changed by admin!"
+}
+
+###
+
+// test - update post - NOT admin, but owner - success
+PUT {{hostname}}/api/posts/52
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNhcmFoIiwiZW1haWwiOiJzYXJhaEBtYWlsLmNvbSIsInVzZXJJZCI6MiwiaXNBZG1pbiI6ZmFsc2UsImFjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjUxMTM1MDAxLjQ2NCwiZXhwIjo2MTY1MTEzNDk0MX0.IVfg0kf2A3wCe699P-mZZzRyXe3BAVqx9YhvfFjYsoA 
+Content-Type: application/json
+
+{
+    "title": "changed title by owner",
+    "content": "this post was changed by owner!"
+}
+
+###
+
+// test - update post - NOT admin, NOT owner - forbidden acccess
+PUT {{hostname}}/api/posts/53
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNhcmFoIiwiZW1haWwiOiJzYXJhaEBtYWlsLmNvbSIsInVzZXJJZCI6MiwiaXNBZG1pbiI6ZmFsc2UsImFjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjUxMTM1MDAxLjQ2NCwiZXhwIjo2MTY1MTEzNDk0MX0.IVfg0kf2A3wCe699P-mZZzRyXe3BAVqx9YhvfFjYsoA
+Content-Type: application/json
+
+{
+    "title": "changed title by foreigner",
+    "content": "this post was changed by foreigner!"
+}
+
+###
+
+// test - update post - inactive user - unauthorized
+PUT {{hostname}}/api/posts/21
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNhcmFoIiwiZW1haWwiOiJzYXJhaEBtYWlsLmNvbSIsInVzZXJJZCI6MiwiaXNBZG1pbiI6ZmFsc2UsImFjdGl2ZSI6ZmFsc2UsImlhdCI6MTY1MTEzNTAwMS40NjQsImV4cCI6NjE2NTExMzQ5NDF9.pHy4Hw-9buzMkBcBU8l00d0zzoC_uInOE3WmamsveTw
+Content-Type: application/json
+
+{
+    "title": "changed title by foreigner",
+    "content": "this post was changed by foreigner!"
+}
+
+### update inexistent post - admin - error - post does not exist
+PUT {{hostname}}/api/posts/55
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MTEzNDkxOS4yNjcsImV4cCI6NjE2NTExMzQ4NTl9.MtUN5JBqVNhNFrMFO6N7xVKymnYw-97pU35joBxocAA
+Content-Type: application/json
+
+{
+    "title": "changed title",
+    "content": "this post was changed!"
+}
+
+###
+// try update post without providing all data - admin - error: post elements should have a value
+PUT {{hostname}}/api/posts/51
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBsb2NhbGhvc3QuY29tIiwidXNlcklkIjoxLCJpc0FkbWluIjp0cnVlLCJhY3RpdmUiOnRydWUsImlhdCI6MTY1MTEzNDkxOS4yNjcsImV4cCI6NjE2NTExMzQ4NTl9.MtUN5JBqVNhNFrMFO6N7xVKymnYw-97pU35joBxocAA
+Content-Type: application/json
+
+{
+    "title": ""
+}
